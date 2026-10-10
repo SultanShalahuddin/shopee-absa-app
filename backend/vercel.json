@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "python -m scripts.download_model",
+  "functions": {
+    "app/main.py": {
+      "includeFiles": "model/**",
+      "excludeFiles": "{scripts/**,requirements-onnx.txt,**/__pycache__/**,**/*.pyc}"
+    }
+  }
+}

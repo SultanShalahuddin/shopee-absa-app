@@ -1,0 +1,10 @@
+# Scraping
+google-play-scraper
+
+# Data handling & EDA
+pandas
+numpy
+matplotlib
+seaborn
+wordcloud
+langdetect

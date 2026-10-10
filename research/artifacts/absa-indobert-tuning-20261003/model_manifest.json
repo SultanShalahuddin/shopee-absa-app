@@ -1,0 +1,13 @@
+{
+  "source_run": "ABSA_IndoBERT_Tuning_20261003_044443",
+  "reference_model_path": "backend/model/model.safetensors",
+  "model_sha256": "b29e93a0fc885915b90348c99cacddff3ebbe5c3273cc3d6c6880b6547dc948b",
+  "model_bytes": 497801224,
+  "architecture": "BertForSequenceClassification",
+  "parameter_count": 124444420,
+  "tensor_count": 201,
+  "dtype": "float32",
+  "classifier_outputs": 4,
+  "dataset_sha256": "73482b976a2daf573e28abba1f5ed7c891435899ff096bf5ee43825a9d8e2acb",
+  "note": "The extracted training archive recorded _num_labels=5, while id2label and classifier weights contain four outputs. backend/model/config.json contains the corrected value 4."
+}

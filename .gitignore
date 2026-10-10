@@ -1,0 +1,47 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Local Codex instructions
+AGENTS.md
+
+# Python
+**/__pycache__/
+**/.venv/
+**/.pytest_cache/
+**/.mypy_cache/
+*.py[cod]
+
+# Node / Next.js / Vercel
+**/node_modules/
+**/.next/
+**/.vercel/
+**/*.tsbuildinfo
+
+# Local model weights and generated inference artifacts
+backend/model/*
+!backend/model/.gitkeep
+**/*.safetensors
+**/pytorch_model.bin
+**/*.onnx
+**/*.onnx_data
+
+# Original imported folders are preserved locally; curated copies live in research/
+/final-project-shopee/
+/ABSA_IndoBERT_Tuning_20261003_044443/
+
+# Obsolete deployment archive; current target is Vercel
+/legacy/
+
+# Notebook and tooling caches
+**/.ipynb_checkpoints/
+**/.cache/
+
+# Archives and OS files
+*.zip
+.DS_Store
+Thumbs.db

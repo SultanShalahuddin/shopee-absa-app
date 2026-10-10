@@ -1,0 +1,50 @@
+{
+  "created_at_utc": "2026-10-10T16:30:40Z",
+  "python": "3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 13:17:27) [MSC v.1929 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "batch_size": 32,
+  "max_length": 128,
+  "test_pairs": 4944,
+  "test_reviews": 618,
+  "tokenization_seconds": 0.213355,
+  "artifacts": {
+    "pytorch_fp32": {
+      "path": "backend/model/model.safetensors",
+      "bytes": 497801224,
+      "mib": 474.74,
+      "sha256": "b29e93a0fc885915b90348c99cacddff3ebbe5c3273cc3d6c6880b6547dc948b"
+    },
+    "onnx_fp32": {
+      "path": "backend/model/onnx/model_fp32.onnx",
+      "bytes": 498064282,
+      "mib": 474.991,
+      "sha256": "5b6aede74171e3c5595bd6401c36b337bd77204eb4841554dbd81e8765ed469c"
+    },
+    "onnx_int8": {
+      "path": "backend/model/onnx/model_int8.onnx",
+      "bytes": 242113474,
+      "mib": 230.897,
+      "sha256": "bc9668f83d7e40bc96feb79a5fd39c4bc2a8b07b618b26b63d529fe41fca3086"
+    }
+  },
+  "runtime": {
+    "pytorch": {
+      "inference_seconds": 177.999383,
+      "milliseconds_per_pair": 36.003111,
+      "pairs_per_second": 27.775,
+      "estimated_ms_per_eight_aspect_review": 288.025
+    },
+    "onnx_fp32": {
+      "inference_seconds": 184.420254,
+      "milliseconds_per_pair": 37.301831,
+      "pairs_per_second": 26.808,
+      "estimated_ms_per_eight_aspect_review": 298.415
+    },
+    "onnx_int8": {
+      "inference_seconds": 81.34039,
+      "milliseconds_per_pair": 16.452344,
+      "pairs_per_second": 60.782,
+      "estimated_ms_per_eight_aspect_review": 131.619
+    }
+  }
+}

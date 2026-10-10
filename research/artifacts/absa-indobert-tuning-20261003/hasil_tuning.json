@@ -1,0 +1,62 @@
+{
+  "dataset_file": "Label_ABSA_Shopee_6176.xlsx",
+  "dataset_sha256": "73482b976a2daf573e28abba1f5ed7c891435899ff096bf5ee43825a9d8e2acb",
+  "seed": 42,
+  "base_model": "indobenchmark/indobert-base-p2",
+  "train_review_count": 4940,
+  "validation_review_count": 618,
+  "test_review_count": 618,
+  "max_length": 128,
+  "best_trial": {
+    "name": "sqrt_weight",
+    "learning_rate": 2e-05,
+    "weight_decay": 0.01,
+    "weight_mode": "sqrt",
+    "best_epoch": 4.0,
+    "validation_accuracy": 0.9650080906148867,
+    "validation_f1_macro": 0.8266574354653207,
+    "validation_f1_weighted": 0.9650175597718527,
+    "validation_f1_aspect_detection": 0.9516008935219658,
+    "validation_f1_sentiment_mentioned": 0.7963497759550391,
+    "validation_loss": 0.47874870896339417
+  },
+  "test_metrics": {
+    "accuracy": 0.969457928802589,
+    "f1_macro": 0.8423761864411282,
+    "f1_weighted": 0.9692731258776276,
+    "f1_aspect_detection": 0.9491790461297889,
+    "f1_sentiment_mentioned": 0.8154265369151323
+  },
+  "aspect_columns": [
+    "iklan_dan_konten",
+    "pengiriman_dan_kurir",
+    "performa_aplikasi",
+    "akun_login_keamanan",
+    "pembayaran_cod_dan_keuangan",
+    "promo_voucher_harga_dan_biaya",
+    "penjual_dan_kualitas_produk",
+    "retur_refund_dan_layanan"
+  ],
+  "aspect_text": {
+    "iklan_dan_konten": "iklan dan konten",
+    "pengiriman_dan_kurir": "pengiriman dan kurir",
+    "performa_aplikasi": "performa aplikasi",
+    "akun_login_keamanan": "akun login dan keamanan",
+    "pembayaran_cod_dan_keuangan": "pembayaran COD dan keuangan",
+    "promo_voucher_harga_dan_biaya": "promo voucher harga dan biaya",
+    "penjual_dan_kualitas_produk": "penjual dan kualitas produk",
+    "retur_refund_dan_layanan": "retur refund dan layanan"
+  },
+  "label2id": {
+    "tidak_disebut": 0,
+    "negatif": 1,
+    "netral": 2,
+    "positif": 3
+  },
+  "id2label": {
+    "0": "tidak_disebut",
+    "1": "negatif",
+    "2": "netral",
+    "3": "positif"
+  }
+}

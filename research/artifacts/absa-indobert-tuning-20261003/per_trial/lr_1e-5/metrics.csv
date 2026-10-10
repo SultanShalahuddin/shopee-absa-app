@@ -1,0 +1,2 @@
+name,learning_rate,weight_decay,weight_mode,best_epoch,validation_accuracy,validation_f1_macro,validation_f1_weighted,validation_f1_aspect_detection,validation_f1_sentiment_mentioned,validation_loss
+lr_1e-5,1e-05,0.01,balanced,4.0,0.9607605177993528,0.8091713573539266,0.9605839145898146,0.9395973154362416,0.7770312227455086,0.9057837724685669

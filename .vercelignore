@@ -1,0 +1,11 @@
+final-project-shopee/
+ABSA_IndoBERT_Tuning_20261003_044443/
+research/
+legacy/
+**/.venv/
+**/node_modules/
+**/.next/
+**/.env
+**/.env.local
+backend/model/
+*.zip
