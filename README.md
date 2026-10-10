@@ -11,6 +11,10 @@ terhadap delapan aspek layanan, lalu setiap aspek diklasifikasikan sebagai
 
 [Lihat presentasi studi kasus](https://docs.google.com/presentation/d/1Yt9WnoOAGz-aDBIiX_y2gcuPKWteK093/edit?usp=sharing)
 
+**Production:** [Aplikasi ReviewScope](https://reviewscope-absa-app.vercel.app) ·
+[API health](https://reviewscope-absa-api.vercel.app/health) ·
+[Repository GitHub](https://github.com/SultanShalahuddin/shopee-absa-app)
+
 ## Latar belakang
 
 Shopee memiliki lebih dari 18 juta ulasan dan rating di Google Play Store.
@@ -184,7 +188,18 @@ Browser
 | Inference | ONNX Runtime CPU, `tokenizers`, NumPy |
 | Database | Supabase PostgreSQL |
 | Model storage | Private Hugging Face model repository |
-| Deployment target | Vercel Hobby |
+| Deployment | Vercel Hobby (frontend dan Python Function terpisah) |
+
+Deployment production:
+
+- Frontend: [`reviewscope-absa-app.vercel.app`](https://reviewscope-absa-app.vercel.app)
+- Backend API: [`reviewscope-absa-api.vercel.app`](https://reviewscope-absa-api.vercel.app)
+- Health check: [`/health`](https://reviewscope-absa-api.vercel.app/health)
+
+Bundle Python Function production berukuran 286,98 MB dan dijalankan sebagai
+Vercel Large Function pada Fluid Compute. Pengujian prediction production
+mencatat latency 250 ms untuk satu review berisi delapan aspek serta berhasil
+menyimpan satu review dan delapan prediction rows ke Supabase.
 
 Model deployment dipatok ke revision Hugging Face
 `4230a98d3bf26a3c154b57b76c1827d604dc285d` dan diverifikasi menggunakan
@@ -302,9 +317,10 @@ tersedia di [`docs/PROJECT_HANDOFF.md`](docs/PROJECT_HANDOFF.md).
 - [x] Migrasi backend ke ONNX Runtime
 - [x] Upload model INT8 ke private Hugging Face repository
 - [x] Smoke test backend dan build frontend lokal
-- [x] Source code dan dokumentasi siap dipush ke GitHub
-- [ ] Deploy backend dan frontend ke Vercel
-- [ ] Verifikasi bundle, cold start, Supabase, CORS, dan alur production end-to-end
+- [x] Source code dan dokumentasi tersedia di GitHub
+- [x] Deploy backend dan frontend ke Vercel
+- [x] Verifikasi model production, bundle, Supabase, dan CORS
+- [x] Uji prediction production menggunakan model ONNX INT8 asli
 
 ## Rekomendasi pengembangan
 

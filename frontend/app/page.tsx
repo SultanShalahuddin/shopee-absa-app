@@ -46,7 +46,15 @@ export default function Home() {
         <div className="nav-links"><a href="#analisis">Analisis</a><a href="#hasil">Hasil</a><a href="#riwayat">Riwayat</a></div>
         <div className="nav-actions">
           <button className="icon-button" onClick={() => setDark((v) => !v)} aria-label="Ubah tema">{dark ? <Sun /> : <Moon />}</button>
-          <a className="icon-button" href="https://github.com" aria-label="GitHub"><Github /></a>
+          <a
+            className="icon-button"
+            href="https://github.com/SultanShalahuddin/shopee-absa-app"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Buka repository GitHub ReviewScope"
+          >
+            <Github />
+          </a>
         </div>
       </nav>
 

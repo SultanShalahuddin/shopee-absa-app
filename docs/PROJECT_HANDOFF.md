@@ -10,19 +10,24 @@ delapan aspek tetap. Setiap aspek mendapat salah satu label
 
 Status saat ini:
 
-- Frontend Next.js dan kontrak API tetap dipertahankan.
-- Backend lokal sudah menggunakan ONNX Runtime CPU dan model dynamic INT8.
+- Frontend Next.js production aktif di
+  `https://reviewscope-absa-app.vercel.app`.
+- Backend FastAPI production aktif di
+  `https://reviewscope-absa-api.vercel.app` menggunakan ONNX Runtime CPU dan
+  model dynamic INT8.
 - Parity FP32 ONNX dan evaluasi INT8 pada golden test set sudah lulus.
 - Model deployment sudah berada di repository Hugging Face private.
 - Runtime tokenizer, smoke test, ukuran lokal, latency, dan memori sudah diuji.
-- Repository Git lokal sudah menggunakan branch `main`, tetapi belum di-commit
-  atau di-push ke GitHub.
-- Backend dan frontend belum di-deploy ke Vercel.
-- Ukuran bundle aktual, cold start Vercel, dan alur Supabase production belum
-  diverifikasi.
+- Source tersedia di `https://github.com/SultanShalahuddin/shopee-absa-app`.
+- Bundle backend production dilaporkan sebesar 286,98 MB dan memakai Vercel
+  Large Functions pada Fluid Compute.
+- Health check production memuat model asli dengan `demo_mode=false`; satu uji
+  prediction menghasilkan delapan aspek dalam 250 ms dan tersimpan ke Supabase.
+- CORS production sudah membolehkan domain frontend final.
+- Pengukuran cold start dan memory telemetry pada runtime Vercel masih tersisa.
 
-Project baru dianggap selesai setelah frontend, API, model, dan database
-berfungsi end-to-end di Vercel tanpa mengekspos secret.
+Alur inti frontend, API, model, dan database sudah tersedia di Vercel. Pekerjaan
+tersisa berfokus pada observability, rotasi secret, dan monitoring pascadeploy.
 
 ## 2. Arsitektur final
 
@@ -213,8 +218,11 @@ Estimasi payload produksi bersih:
 | Total estimasi | 358.469 MiB |
 | Estimasi ruang ke batas 500 MiB | 141.531 MiB |
 
-Ukuran function yang dibangun Vercel tetap menjadi hasil final yang harus
-diverifikasi.
+Vercel melaporkan bundle function production sebesar 286,98 MB. Standard path
+deployment menerapkan batas efektif 225 MB pada build ini, sehingga backend
+dideploy sebagai Large Function dengan `VERCEL_SUPPORT_LARGE_FUNCTIONS=1` pada
+Fluid Compute. Angka ini adalah ukuran yang dilaporkan Vercel dan tidak harus
+sama dengan estimasi payload lokal di atas.
 
 ## 8. Backend dan API
 
@@ -322,6 +330,13 @@ menaruhnya dalam `NEXT_PUBLIC_*`, source code, log, dokumentasi, atau response.
 - FP32 model, ONNX weights, `.env`, virtual environments, dan folder impor asli
   tetap lokal serta diabaikan oleh Git.
 - Model private Hugging Face dan read-only access sudah diverifikasi.
+- Repository GitHub dan kedua Vercel project production sudah aktif.
+- `/health` production mengembalikan `model_loaded=true`, `demo_mode=false`,
+  `model_format=onnx-int8`, dan `database_enabled=true`.
+- Prediction production menghasilkan delapan aspek dalam 250 ms dengan
+  `stored=true`; satu row review dan delapan row aspek berhasil dipersistenkan.
+- Frontend production merespons HTTP 200 dan preflight CORS backend mengizinkan
+  origin `https://reviewscope-absa-app.vercel.app`.
 
 ## 13. Perintah verifikasi lokal
 
@@ -343,20 +358,15 @@ python -m scripts.onnx_pipeline
 
 ## 14. Pekerjaan tersisa
 
-Urutan deployment yang direkomendasikan:
+Tindak lanjut pascadeploy:
 
-1. Buat repository GitHub kosong, review kandidat commit, lalu push source.
-2. Buat Vercel project backend dengan Root Directory `backend`.
-3. Isi seluruh environment variable backend pada Vercel.
-4. Deploy backend; build harus mengunduh dan memverifikasi model private.
-5. Ukur bundle function aktual dan pastikan tetap di bawah 500 MiB.
-6. Verifikasi `/health`, prediction, history, serta satu insert review dengan
-   delapan aspect predictions di Supabase.
-7. Ukur cold start, warm inference, dan memory pada runtime Vercel.
-8. Buat Vercel project frontend dengan Root Directory `frontend`.
-9. Isi `NEXT_PUBLIC_API_URL` dengan URL backend.
-10. Set `CORS_ORIGINS` backend ke domain frontend final dan redeploy.
-11. Pastikan tidak ada token pada browser bundle, network response, atau log.
+1. Jalankan smoke test UI dari browser dan periksa hasil serta history.
+2. Ukur cold start, warm inference, dan memory pada runtime Vercel secara lebih
+   terkontrol; latency 250 ms yang tercatat berasal dari satu request production.
+3. Rotasi privileged Supabase key yang pernah digunakan selama debugging, lalu
+   perbarui environment variable Vercel tanpa memasukkannya ke Git.
+4. Pantau log untuk kegagalan unduhan model, startup, persistence, dan timeout.
+5. Pastikan tidak ada token pada browser bundle, network response, atau log.
 
 ## 15. Batasan dan prinsip keselamatan
 
