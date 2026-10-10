@@ -24,6 +24,8 @@ Status saat ini:
 - Health check production memuat model asli dengan `demo_mode=false`; satu uji
   prediction menghasilkan delapan aspek dalam 250 ms dan tersimpan ke Supabase.
 - CORS production sudah membolehkan domain frontend final.
+- GitHub Actions CI memeriksa backend dan frontend pada setiap push atau pull
+  request ke `main`; CD tetap ditangani integrasi GitHub–Vercel.
 - Pengukuran cold start dan memory telemetry pada runtime Vercel masih tersisa.
 
 Alur inti frontend, API, model, dan database sudah tersedia di Vercel. Pekerjaan
@@ -337,6 +339,9 @@ menaruhnya dalam `NEXT_PUBLIC_*`, source code, log, dokumentasi, atau response.
   `stored=true`; satu row review dan delapan row aspek berhasil dipersistenkan.
 - Frontend production merespons HTTP 200 dan preflight CORS backend mengizinkan
   origin `https://reviewscope-absa-app.vercel.app`.
+- Workflow `.github/workflows/ci.yml` menjalankan dependency check, Python
+  compile/import check, TypeScript check, dan Next.js production build tanpa
+  membutuhkan secret atau model deployment.
 
 ## 13. Perintah verifikasi lokal
 
@@ -360,13 +365,15 @@ python -m scripts.onnx_pipeline
 
 Tindak lanjut pascadeploy:
 
-1. Jalankan smoke test UI dari browser dan periksa hasil serta history.
-2. Ukur cold start, warm inference, dan memory pada runtime Vercel secara lebih
+1. Pastikan run pertama GitHub Actions berstatus hijau dan simpan screenshot
+   halaman Actions sebagai bukti CI/CD.
+2. Jalankan smoke test UI dari browser dan periksa hasil serta history.
+3. Ukur cold start, warm inference, dan memory pada runtime Vercel secara lebih
    terkontrol; latency 250 ms yang tercatat berasal dari satu request production.
-3. Rotasi privileged Supabase key yang pernah digunakan selama debugging, lalu
+4. Rotasi privileged Supabase key yang pernah digunakan selama debugging, lalu
    perbarui environment variable Vercel tanpa memasukkannya ke Git.
-4. Pantau log untuk kegagalan unduhan model, startup, persistence, dan timeout.
-5. Pastikan tidak ada token pada browser bundle, network response, atau log.
+5. Pantau log untuk kegagalan unduhan model, startup, persistence, dan timeout.
+6. Pastikan tidak ada token pada browser bundle, network response, atau log.
 
 ## 15. Batasan dan prinsip keselamatan
 

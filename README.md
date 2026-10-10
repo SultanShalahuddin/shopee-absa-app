@@ -1,5 +1,7 @@
 # ReviewScope ABSA
 
+[![ReviewScope CI](https://github.com/SultanShalahuddin/shopee-absa-app/actions/workflows/ci.yml/badge.svg)](https://github.com/SultanShalahuddin/shopee-absa-app/actions/workflows/ci.yml)
+
 ReviewScope adalah aplikasi **Aspect-Based Sentiment Analysis (ABSA)** untuk
 menganalisis ulasan pengguna Shopee berbahasa Indonesia. Satu ulasan dievaluasi
 terhadap delapan aspek layanan, lalu setiap aspek diklasifikasikan sebagai
@@ -309,6 +311,17 @@ Dataset terkurasi, golden test manifest, notebook, dan laporan metrik disimpan
 di `research/`. Detail kontrak model, acceptance gate, dan deployment checklist
 tersedia di [`docs/PROJECT_HANDOFF.md`](docs/PROJECT_HANDOFF.md).
 
+## CI/CD
+
+- **Continuous Integration:** GitHub Actions menjalankan pemeriksaan dependency,
+  syntax/import backend, type-check frontend, dan production build pada setiap
+  push atau pull request ke `main`.
+- **Continuous Deployment:** integrasi GitHub–Vercel membuat deployment otomatis
+  dari branch `main`. Workflow CI tidak menyimpan secret dan tidak menjalankan
+  deployment kedua melalui Vercel CLI.
+
+Workflow tersedia di [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+
 ## Status deployment
 
 - [x] Tuning dan evaluasi IndoBERT FP32
@@ -318,6 +331,7 @@ tersedia di [`docs/PROJECT_HANDOFF.md`](docs/PROJECT_HANDOFF.md).
 - [x] Upload model INT8 ke private Hugging Face repository
 - [x] Smoke test backend dan build frontend lokal
 - [x] Source code dan dokumentasi tersedia di GitHub
+- [x] GitHub Actions CI dikonfigurasi untuk backend dan frontend
 - [x] Deploy backend dan frontend ke Vercel
 - [x] Verifikasi model production, bundle, Supabase, dan CORS
 - [x] Uji prediction production menggunakan model ONNX INT8 asli
